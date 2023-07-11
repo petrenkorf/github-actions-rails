@@ -4,7 +4,7 @@ on:
       - main
 
 jobs:
-  run-tests:
+  RSpec:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,4 +24,19 @@ jobs:
 
       - name: 'Run tests'
         run: bundle exec rspec
+
+  Run-Linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout code'
+        uses: actions/checkout@v2
+
+      - name: 'Setup Ruby and install gems'
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: 'Run tests'
+        run: bundle exec rubocop
 
