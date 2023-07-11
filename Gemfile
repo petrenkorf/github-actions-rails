@@ -75,4 +75,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem "brakeman", "~> 6.0"
+gem 'brakeman', '~> 6.0'
