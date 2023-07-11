@@ -53,5 +53,5 @@ jobs:
           bundler-cache: true
 
       - name: 'Run Breakman'
-        run: bundle exec breakman
+        run: bundle exec brakeman
 
