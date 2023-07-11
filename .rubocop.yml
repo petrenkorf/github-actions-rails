@@ -7,3 +7,4 @@ AllCops:
     - 'config/*'
     - 'spec/*'
     - 'bin/*'
+    - 'vendor/**/*.rb'
