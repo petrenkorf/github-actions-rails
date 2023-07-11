@@ -23,5 +23,5 @@ jobs:
           bin/rails db:setup
 
       - name: 'Run tests'
-        run: bin/rspec
+        run: rspec
 
