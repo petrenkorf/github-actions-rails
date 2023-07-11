@@ -64,4 +64,4 @@ jobs:
 
       - name: 'Build Docker container'
         run: |
-          docker build docker/ -t sample_api --build-context=.
+          docker build . -f docker/Dockerfile -t sample_api
