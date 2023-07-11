@@ -2,6 +2,7 @@ Style/Documentation:
   Enabled: false
 
 AllCops:
+  NewCops: enable
   Exclude:
     - 'config/*'
     - 'spec/*'
