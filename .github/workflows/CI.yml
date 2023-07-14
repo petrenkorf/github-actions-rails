@@ -84,7 +84,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: docker_rails_api_sample
-          IMAGE_TAG: rails_api_demo_image
+          IMAGE_TAG: ${{ github.ref_name  }}
         run: |
           docker build . -f docker/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
