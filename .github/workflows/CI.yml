@@ -106,11 +106,14 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: 'Get last Task Definition'
+        run: aws ecs describe-task-definition --task-definition=arn:aws:ecs:us-east-2:470686572691:task-definition/MyFirstTask --query taskDefinition >> ${{ env.ECS_TASK_DEFINITION_QA }}
+
       - name: 'Fill task definition'
         id: task-definition
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: .aws/task-definition.json
+          task-definition: ${{ env.ESC_TASK_DEFINITION }}
           container-name: api
           image: ${{ steps.login-ecr.outputs.registry }}/docker_rails_api_sample:${{ github.ref_name }}
 
