@@ -5,6 +5,9 @@ on:
         #    tags:
         #      - '*-rc'
 
+env:
+  ECS_TASK_DEFINITION: .aws/task_definition.json
+
 jobs:
   RSpec:
     runs-on: ubuntu-latest
@@ -107,7 +110,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: 'Get last Task Definition'
-        run: aws ecs describe-task-definition --task-definition=arn:aws:ecs:us-east-2:470686572691:task-definition/MyFirstTask --query taskDefinition >> ${{ env.ECS_TASK_DEFINITION_QA }}
+        run: aws ecs describe-task-definition --task-definition=arn:aws:ecs:us-east-2:470686572691:task-definition/MyFirstTask --query taskDefinition >> ${{ env.ECS_TASK_DEFINITION }}
 
       - name: 'Fill task definition'
         id: task-definition
