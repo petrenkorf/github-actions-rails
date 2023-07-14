@@ -1,6 +1,6 @@
 FROM ruby:3.1.2
 
-RUN apt-get update && apt-get install -y ruby-build
+RUN apt-get update && apt-get install -y ruby-build && apt-get clean
 
 WORKDIR /api
 
