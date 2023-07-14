@@ -125,4 +125,4 @@ jobs:
         with:
           task-definition: ${{ steps.task-definition.outputs.task-definition }}
           service: my-api
-          cluster: my-cluster
+          cluster: DevCluster
