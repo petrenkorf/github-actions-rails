@@ -1,6 +1,7 @@
-FROM ruby:3.1.2
+FROM ruby:3.1.2-alpine
 
-RUN apt-get update && apt-get install -y ruby-build && apt-get clean
+RUN apk update && apk add build-base ruby-json tzdata && rm -rf /var/cache/apt/*
+RUN gem install bundler
 
 WORKDIR /api
 
