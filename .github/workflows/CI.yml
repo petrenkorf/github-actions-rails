@@ -61,7 +61,7 @@ jobs:
       - name: 'Run Breakman'
         run: bundle exec brakeman
 
-  build:
+  Build:
     runs-on: ubuntu-latest
     needs: [RSpec, Linter, Security-Check]
 
@@ -88,3 +88,26 @@ jobs:
         run: |
           docker build . -f docker/Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [Build]
+
+    steps:
+      - name: 'AWS ECR Login'
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: 'Fill task definition'
+        id: task-definition
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: api
+          image: ${{ steps.login-ecr.outputs.registry }}/docker_rails_api_sample:${{ github.ref_name }}
+
+      - name: 'Deploy to Amazon ECS Service'
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-definition.outputs.task-definition }}
+          service: my-api
+          cluster: my-cluster
